@@ -31,4 +31,3 @@ spec:
         - name: mongodb-volume
           persistentVolumeClaim:
             claimName: mongodb-pvc
-      restartPolicy: Always

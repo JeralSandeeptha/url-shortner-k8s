@@ -27,3 +27,13 @@ spec:
             name: pgadmin-service
             port:
               number: 5433
+  - host: mongo.lumenlink.com  # separate subdomain
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mongo-express-service
+            port:
+              number: 8081
