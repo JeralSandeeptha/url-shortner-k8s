@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  frontend-deployment
+  labels:
+    app:  frontend-pod
+spec:
+  selector:
+    matchLabels:
+      app: frontend-pod
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: frontend-pod
+    spec:
+      containers:
+      - name:  frontend-service-container
+        image:  jeralsandeeptha/url-shortner-frontend-service-dev:e8d6fc591df74fd889137c90f36818dd00448b98
+        ports:
+          - containerPort:  80
+        env: 
+          - name: MODE
+            value: production
+          - name: VITE_API_URL
+            value: http://lumenlink.com
+        restartPolicy: always
