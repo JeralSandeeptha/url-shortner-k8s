@@ -23,5 +23,5 @@ spec:
           - name: MODE
             value: production
           - name: VITE_API_URL
-            value: http://lumenlink.com
+            value: http://api.lumenlink.com
         restartPolicy: always
