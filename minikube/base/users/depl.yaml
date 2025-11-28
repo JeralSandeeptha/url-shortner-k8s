@@ -16,7 +16,7 @@ spec:
     spec:
       restartPolicy: Always
       containers:
-      - image: jeralsandeeptha/url-shortner-user-service-develop:895e4f1d417e88d8a1da57e02386585ff3624734
+      - image: jeralsandeeptha/url-shortner-user-service-main:6f3042c24bbee362e79744cfd1e3095a87e8448e
         name: users-service
         imagePullPolicy: Always
         env:
@@ -27,7 +27,7 @@ spec:
         - name: KEYCLOACK_SERVER_URL
           value: "http://keycloak-service:8070"       
         - name: KEYCLOACK_GATEWAY_SERVER_URL
-          value: ""
+          value: "http://api.lumenlink.com/auth"
         - name: KEYCLOACK_CLIENT_ID
           value: "url-shortner-user-service"  
         - name: KEYCLOACK_CLIENT_SECRET
