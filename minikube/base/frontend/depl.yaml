@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name:  frontend-service-container
-        image:  jeralsandeeptha/url-shortner-frontend-service-dev:e8d6fc591df74fd889137c90f36818dd00448b98
+        image:  jeralsandeeptha/url-shortner-frontend-service-main:bf2317351e6cae5ddd58eb2bdd77114bbba1abe6
         ports:
           - containerPort:  80
         env: 
