@@ -27,6 +27,6 @@ spec:
         - name: DATABASE_URL
           value: "mongodb://jeral:1234@mongodb-service:27017/url_generate_db?authSource=admin"       
         - name: BASE_URL
-          value: "http://lumenlink.com"   
+          value: "https://lumenlink.com"   
         ports:
         - containerPort: 5003
