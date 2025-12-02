@@ -16,7 +16,7 @@ spec:
     spec:
       restartPolicy: Always
       containers:
-      - image: jeralsandeeptha/url-shortner-user-service-main:979adf6ca7e7f419756cfb27ee6101910af8ac81
+      - image: jeralsandeeptha/url-shortner-user-service-main:dba29292582f96a995d65f8327b5843945190ef5
         name: users-service
         imagePullPolicy: Always
         env:
