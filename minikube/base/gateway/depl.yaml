@@ -25,13 +25,13 @@ spec:
         - name: NODE_ENV
           value: "production" 
         - name: USER_API_URL
-          value: https://user-service:5001
+          value: http://user-service:5001
         - name: URL_GENERATE_API_URL
-          value: https://url-generate-service:5002
+          value: http://url-generate-service:5002
         - name: URL_REDIRECT_API_URL
-          value: https://url-redirect-service:5003
+          value: http://url-redirect-service:5003
         - name: KEYCLOAK_API_URL
-          value: https://keycloak-service:8070
+          value: http://keycloak-service:8070
         - name: BASE_URL
           value: "https://lumenlink.com"
         ports:
