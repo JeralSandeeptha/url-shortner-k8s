@@ -25,7 +25,7 @@ spec:
         - name: POSTGRES_PASSWORD
           value: keycloak_password 
         ports:
-        - containerPort: 5431
+        - containerPort: 5434
         volumeMounts:
         - mountPath: /var/lib/postgresql/data
           name: keycloak-db-volume
