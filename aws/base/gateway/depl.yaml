@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-deployment
+  labels:
+    app: gateway-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway-pod
+  template:
+    metadata:
+      labels:
+        app: gateway-pod
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: jeralsandeeptha/url-shortner-gateway-service-main:b61521631d3f6b64fe72fa886908267fecd86daf
+        name: gateway-api-service
+        imagePullPolicy: Always
+        env:
+        - name: PORT
+          value: "5000"       
+        - name: NODE_ENV
+          value: "production" 
+        - name: USER_API_URL
+          value: http://user-service:5001
+        - name: URL_GENERATE_API_URL
+          value: http://url-generate-service:5002
+        - name: URL_REDIRECT_API_URL
+          value: http://url-redirect-service:5003
+        - name: KEYCLOAK_API_URL
+          value: http://keycloak-service:8070
+        - name: BASE_URL
+          value: "https://lumenlink.online"
+        ports:
+        - containerPort: 5000

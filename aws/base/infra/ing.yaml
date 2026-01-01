@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lumenlink-alb-ingress
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    eks.amazonaws.com/role-arn: arn:aws:iam::108772197183:role/AWSLoadBalancerControllerRole
+    alb.ingress.kubernetes.io/subnets: subnet-0b853ef2062b79f2e, subnet-0a286490c5796cb4a
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:108772197183:certificate/e95da7e8-a7a3-4edd-be07-4708389752e2
+spec:
+  ingressClassName: alb
+  tls:
+    - hosts:
+      - "*.lumenlink.online"
+  rules:
+    - host: lumenlink.online
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-service
+                port:
+                  number: 80
+    - host: api.lumenlink.online
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway-service
+                port:
+                  number: 5000
