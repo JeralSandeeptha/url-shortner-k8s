@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: url-redirect-deployment
+  labels:
+    app: url-redirect-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: url-redirect-pod
+  template:
+    metadata:
+      labels:
+        app: url-redirect-pod
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: jeralsandeeptha/url-shortner-url-redirect-service-main:ff117e3d98a1147642b6d03dff725c2b4900310f
+        name: url-redirect-service
+        imagePullPolicy: Always
+        env:
+        - name: PORT
+          value: "5003"       
+        - name: NODE_ENV
+          value: "production"       
+        - name: DATABASE_URL
+          value: "mongodb://jeral:1234@mongodb-service:27017/url_generate_db?authSource=admin"       
+        - name: BASE_URL
+          value: "https://lumenlink.online"   
+        ports:
+        - containerPort: 5003

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: url-generate-deployment
+  labels:
+    app: url-generate-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: url-generate-pod
+  template:
+    metadata:
+      labels:
+        app: url-generate-pod
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: jeralsandeeptha/url-shortner-url-generate-service-main:6241a82e13207ee357f48a1f08343dc897b7aa92
+        name: url-service
+        imagePullPolicy: Always
+        env:
+        - name: PORT
+          value: "5002"       
+        - name: NODE_ENV
+          value: "production"       
+        - name: DATABASE_URL
+          value: "mongodb://jeral:1234@mongodb-service:27017/url_generate_db?authSource=admin"       
+        - name: BASE_URL
+          value: "https://lumenlink.online"   
+        ports:
+        - containerPort: 5002

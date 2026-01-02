@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak-deployment
+  labels:
+    app: keycloak-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak-pod
+  template:
+    metadata:
+      labels:
+        app: keycloak-pod
+    spec:
+      containers:
+      - image: quay.io/keycloak/keycloak:latest
+        name: keycloak-container
+        command: ["/opt/keycloak/bin/kc.sh"]
+        args: ["start-dev"]
+        env:
+        - name: KC_DB
+          value: postgres
+        - name: KC_DB_URL
+          value: jdbc:postgresql://keycloak-db-service:5434/keycloak
+        - name: KC_DB_USERNAME
+          value: keycloak
+        - name: KC_DB_PASSWORD
+          value: keycloak_password
+        - name: KEYCLOAK_ADMIN
+          value: admin
+        - name: KEYCLOAK_ADMIN_PASSWORD
+          value: admin_password
+        - name: KC_HOSTNAME_STRICT
+          value: "false"
+        - name: KC_HOSTNAME_STRICT_HTTPS
+          value: "false"
+        - name: KC_HTTP_ENABLED
+          value: "true"
+        ports:
+        - containerPort: 8070
+        volumeMounts:
+        - mountPath: /opt/keycloak/data
+          name: keycloak-volume
+      volumes:
+        - name: keycloak-volume
+          persistentVolumeClaim:
+            claimName: keycloak-pvc
